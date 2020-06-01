@@ -1,0 +1,62 @@
+{% set active_page = "Names" %}
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="display-4">Names list</h1>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/names/add/" method="post">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="value" placeholder="value" required>
+                            </div>
+                             <div class="form-group">
+                                <input class="form-control" type="number" name="age" placeholder="age" required>
+                            </div>
+                            <button class="btn btn-primary" type="submit">
+                                Add
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for name in names %}
+                    <tr>
+                        <td>{{ name.id }}</td>
+                        <td>{{ name.value }}</td>
+                        <td>{{ name.age }}</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" href="/names/delete/{{ name.id }}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock%}
